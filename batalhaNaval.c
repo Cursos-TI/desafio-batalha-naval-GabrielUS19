@@ -10,6 +10,63 @@ int main() {
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
 
+    int linha1 = 1, coluna1 = 4, linha2 = 5, coluna2 = 6, erroInput = 0;
+
+    int tabuleiro[10][10] = {0};
+
+    // Verifica se é possível posicionar o navio da base para cima
+    int paraCima = (linha1 - 2) < 0 ? 0 : 1;
+
+    // Posiciona o navio para cima ou para baixo dependendo da variavel paraCima
+    for (int i = 0; i < 3; i++) {
+        if (paraCima) {
+            tabuleiro[linha1 - i][coluna1] = 3;
+
+        } else {
+            tabuleiro[linha1 + i][coluna1] = 3;
+
+        } 
+    }
+
+    // Verifica se é possível posicionar o navio da base para a esquerda
+    int paraEsquerda = (coluna2 - 2) < 0 ? 0 : 1;
+
+    // Posiciona o navio para esquerda ou para a dineita dependendo da variavel paraEsquerda
+    for (int i = 0; i < 3; i++) {
+        if (paraEsquerda) {
+            if (tabuleiro[linha2][coluna2 - i] == 3) {
+                erroInput = 1;
+                printf("Coordenada do navio 2 sobreescreveu o navio 1, mude o tente novamente\n");
+                break;
+
+            } else {
+                tabuleiro[linha2][coluna2 - i] = 3;
+            }
+
+        } else {
+            if (tabuleiro[linha2][coluna2 + i] == 3) {
+                erroInput = 1;
+                printf("Coordenada do navio 2 sobreescreveu o navio 1, mude o tente novamente\n");
+                break;
+
+            } else {
+                tabuleiro[linha2][coluna2 + i] = 3;
+
+            }
+
+        } 
+    }
+
+    if (!erroInput) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                printf("%d ", tabuleiro[i][j]);
+            }
+            printf("\n");
+        }
+    }
+    
+
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
     // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
