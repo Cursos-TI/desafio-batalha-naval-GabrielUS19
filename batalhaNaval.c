@@ -4,15 +4,32 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
+#define LADO 10
+
+int insertShip(int tabuleiro[LADO][LADO], int ship[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        if (tabuleiro[ship[0][i]][ship[1][i]] == 3) {
+            printf("Coordenada já cadastrada, tente novamente!");
+            return 0;
+
+        } else {
+            tabuleiro[ship[0][i]][ship[1][i]] = 3;
+        }
+    }
+
+    return 1;
+}
+
 int main() {
     // Nível Novato - Posicionamento dos Navios
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+    
 
     int linha1 = 1, coluna1 = 4, linha2 = 5, coluna2 = 6, erroInput = 0;
 
-    int tabuleiro[10][10] = {0};
+    int tabuleiro[LADO][LADO] = {0};
 
     // Verifica se é possível posicionar o navio da base para cima
     int paraCima = (linha1 - 2) < 0 ? 0 : 1;
@@ -58,19 +75,64 @@ int main() {
     }
 
     if (!erroInput) {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < LADO; i++) {
+            for (int j = 0; j < LADO; j++) {
                 printf("%d ", tabuleiro[i][j]);
             }
             printf("\n");
         }
     }
+
+    printf("\n");
+
     
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
     // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
     // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
+
+    int matrizAventureiro[LADO][LADO] = {0};
+    int navios[4][2][3] = {
+        // Navio 1
+        {
+            {2, 3, 4},
+            {4, 4, 4}
+        },
+        // Navio 2
+        {
+            {9, 9, 9},
+            {1, 2, 3}
+        },
+        // Navio 3
+        {
+            {5, 6, 7},
+            {5, 6, 7}
+        },
+        // Navio 4
+        {
+            {6, 5, 4},
+            {3, 4, 5}
+        }
+    };
+
+    for (int i = 0; i < 4; i++) {
+        if (insertShip(matrizAventureiro, navios[i])) {
+            printf("Navio %d inserido com sucesso!\n", i);
+
+        } else {
+            return 0;
+
+        }
+    }
+
+    printf("TABULEIRO AVENTUREIRO\n");
+    for (int i = 0; i < LADO; i++) {
+        for (int j = 0; j < LADO; j++) {
+            printf("%d ", matrizAventureiro[i][j]);
+        }
+        printf("\n");
+    }
 
     // Nível Mestre - Habilidades Especiais com Matrizes
     // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
