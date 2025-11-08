@@ -8,13 +8,19 @@
 
 int insertShip(int tabuleiro[LADO][LADO], int ship[3][3]) {
     for (int i = 0; i < 3; i++) {
-        if (tabuleiro[ship[0][i]][ship[1][i]] == 3) {
-            printf("Coordenada já cadastrada, tente novamente!");
+        if (ship[0][i] >= LADO || ship[1][i] >= LADO) {
+            printf("Coordenada ultrapassou os limites do tabuleiro, tente novamente\n");
             return 0;
 
-        } else {
-            tabuleiro[ship[0][i]][ship[1][i]] = 3;
         }
+
+        if (tabuleiro[ship[0][i]][ship[1][i]] == 3) {
+            printf("Coordenada já cadastrada, tente novamente!\n");
+            return 0;
+
+        } 
+        
+        tabuleiro[ship[0][i]][ship[1][i]] = 3;
     }
 
     return 1;
@@ -118,7 +124,7 @@ int main() {
 
     for (int i = 0; i < 4; i++) {
         if (insertShip(matrizAventureiro, navios[i])) {
-            printf("Navio %d inserido com sucesso!\n", i);
+            printf("Navio %d inserido com sucesso!\n", i + 1);
 
         } else {
             return 0;
@@ -126,6 +132,7 @@ int main() {
         }
     }
 
+    // Mostra o tabuleiro no terminal
     printf("TABULEIRO AVENTUREIRO\n");
     for (int i = 0; i < LADO; i++) {
         for (int j = 0; j < LADO; j++) {
