@@ -99,6 +99,10 @@ int main() {
     // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
 
     int matrizAventureiro[LADO][LADO] = {0};
+    int coordenadaCone[2] = {2, 6};
+    int coordenadaCruz[2] = {5, 3};
+    int coordenadaOcta[2] = {7, 6};
+
     int navios[4][2][3] = {
         // Navio 1
         {
@@ -129,6 +133,86 @@ int main() {
         } else {
             return 0;
 
+        }
+    }
+
+    // Habilidade do Cone
+    for (int i = coordenadaCone[0]; i < coordenadaCone[0] + 3; i++) {
+        for (int j = coordenadaCone[1]; j < coordenadaCone[1] + 5; j++) {
+            int column = i - coordenadaCone[0];
+            int line = j - coordenadaCone[1];
+
+            switch (column)
+            {
+            case 0:
+                if (line == 2 && i < 10 && j < 10) matrizAventureiro[i][j] = 1;
+
+                break;
+            case 1:
+                if (line == 1 || line == 2 || line == 3 && i < 10 && j < 10) matrizAventureiro[i][j] = 1;
+
+                break;
+            case 2:
+                if (i < 10 && j < 10) matrizAventureiro[i][j] = 1;
+
+                break;
+            default:
+                break;
+            }
+        }
+    }
+
+    // Habilidade da Cruz
+    for (int i = coordenadaCruz[0]; i < coordenadaCruz[0] + 3; i++) {
+        for (int j = coordenadaCruz[1]; j < coordenadaCruz[1] + 5; j++) {
+            int column = i - coordenadaCruz[0];
+            int line = j - coordenadaCruz[1];
+
+            switch (column)
+            {
+            case 0:
+                if (line == 2 && j < 10 && i < 10) matrizAventureiro[i][j] = 1;
+                
+                break;
+            case 1:
+                if (j < 10 && i < 10) matrizAventureiro[i][j] = 1;
+
+                break;
+
+            case 2:
+                if (line == 2 && j < 10 && i < 10) matrizAventureiro[i][j] = 1;
+
+                break;
+            default:
+                break;
+            }
+        }
+    }
+
+    // Habilidade do Octaedro
+    for (int i = coordenadaOcta[0]; i < coordenadaOcta[0] + 3; i++) {
+        for (int j = coordenadaOcta[1]; j < coordenadaOcta[1] + 5; j++) {
+            int column = i - coordenadaOcta[0];
+            int line = j - coordenadaOcta[1];
+
+            switch (column)
+            {
+            case 0:
+                if (line == 2 && j < 10 && i < 10) matrizAventureiro[i][j] = 1;
+                
+                break;
+            case 1:
+                if (line == 1 || line == 2 || line == 3 && i < 10 && j < 10) matrizAventureiro[i][j] = 1;
+
+                break;
+
+            case 2:
+                if (line == 2 && j < 10 && i < 10) matrizAventureiro[i][j] = 1;
+
+                break;
+            default:
+                break;
+            }
         }
     }
 
